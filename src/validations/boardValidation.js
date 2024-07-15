@@ -19,13 +19,12 @@ const createNew = async (req, res, next) => {
 
 
   try {
-    console.log('req.body:', req.body)
     // abortEarly de tra ve tat ca cac loi khi validation neu khong se chi tra ve loi dau tien gap phai
     await correctConditon.validateAsync(req.body, { abortEarly: false })
-    // next()
-    res.status(StatusCodes.CREATED).json({ message: 'POST from validation create new Board' })
+    //Validate du hoan thien chi chuyen request sang Controller
+    next()
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
       errors: new Error(error).message
     })
