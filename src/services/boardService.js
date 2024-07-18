@@ -40,8 +40,8 @@ const getDetails = async (boardId) => {
       column.cards = resBoard.cards.filter(card => card.columnId.equals(column._id))
       // column.cards = resBoard.cards.filter(card => card.columnId.toString() === column._id.toString())
     })
-    delete resBoard.cards
 
+    delete resBoard.cards
     return resBoard
   } catch (error) { throw error }
 }
