@@ -15,4 +15,8 @@ Router.route('/:id')
   .get(boardController.getDetails)
   .put(boardValidation.update, boardController.update)
 
+//Api ho tro cho viec keo tha giua card giua cac column khac nhau
+Router.route('/supports/moving_card')
+  .put(boardValidation.moveCardToDefferentColumn, boardController.moveCardToDefferentColumn)
+
 export const boardRoute = Router
