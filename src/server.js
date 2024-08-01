@@ -22,9 +22,17 @@ const START_SERVER = () => {
   //Middleware xu ly loi tap trung
   app.use(errorHandlingMiddleware)
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`Hello ${env.AUTHOR}, I am running at http://${env.APP_HOST}:${env.APP_PORT}/`)
-  })
+  //Moi truong production render.com
+  if (env.BUILD_MODE === 'production') {
+    app.listen(process.env.PORT, () => {
+      console.log(`Production: Hello ${env.AUTHOR}, I am running at Port: ${process.env.PORT}/`)
+    })
+  } else {
+    //Môi trường local dev
+    app.listen(env.LOCAL_DEV_APP_PORT, env.LOCAL_DEV_APP_HOST, () => {
+      console.log(`Local dev: Hello ${env.AUTHOR}, I am running at http://${env.LOCAL_DEV_APP_HOST}:${env.LOCAL_DEV_APP_PORT}/`)
+    })
+  }
 
   //thuc hien dong connect khi dung server
   exitHook(async () => {
